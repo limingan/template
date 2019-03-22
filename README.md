@@ -5,8 +5,8 @@
 
 ## 2.启动
 调试阶段，需要分前后端启动，请分别移步至  
-[template-fe 前端项目启动](master/template-fe/README.md#1)  
-[template-bg 后端项目启动](master/template-bg/README.md#2)  
+[template-fe 前端项目启动](template-fe/README.md#1)  
+[template-bg 后端项目启动](template-bg/README.md#2)  
 
 ## 3.目录结构
 ```   
@@ -15,8 +15,8 @@
 
 ```
 fe,os项目目录结构移步至  
-[template-fe 前端项目目录结构](master/template-fe/README.md#3)  
-[template-bg 后端项目目录结构](master/template-bg/README.md#3)  
+[template-fe 前端项目目录结构](template-fe/README.md#3)  
+[template-bg 后端项目目录结构](template-bg/README.md#3)  
 
 ## 4.移植
 
@@ -30,13 +30,13 @@ fe,os项目目录结构移步至
 
 ## 6.开发指南
 fe,bg项目开发指南移步至  
-[template-fe 前端项目开发指南](master/template-fe/README.md#4)  
-[template-bg 后端项目开发指南](master/template-bg/README.md#4)  
+[template-fe 前端项目开发指南](template-fe/README.md#4)  
+[template-bg 后端项目开发指南](template-bg/README.md#4)  
 
 
 ## 7.技术规范  
 fe.bg项目开发指南移步至  
-[template-fe 前端项目技术规范](master/template-fe/README.md#5)  
-[template-bg 后端项目技术规范](master/template-bg/README.md#5)  
+[template-fe 前端项目技术规范](template-fe/README.md#5)  
+[template-bg 后端项目技术规范](template-bg/README.md#5)  
 
 
