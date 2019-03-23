@@ -3,6 +3,21 @@ server:
   serverHeader: collection
 
 spring:
+    #应用程序名称
+    application:
+        name: cityManage
+    #引入其他yml
+    profiles:
+        #受理中心配置
+        include: accept-center
+    #guava
+    cache:
+        type: guava
+        #有且只有一个cache-name
+        cache-name: commonCacheGuava
+        guava:
+            ##最大缓存数量，失效时间
+            spec: maximumSize=1000,expireAfterWrite=60m
     datasource:
         name: mysql_test
         type: com.alibaba.druid.pool.DruidDataSource
@@ -12,12 +27,12 @@ spring:
           filters: stat
           driver-class-name: com.mysql.jdbc.Driver
           #基本属性
-#          url: jdbc:mysql://127.0.0.1:3306/world?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false&serverTimezone=UTC
-#          username: root
-#          password: 123456
-          url: jdbc:mysql://94.191.38.143:3306/cspadmin?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false&serverTimezone=UTC
+          url: jdbc:mysql://localhost:3306/poic?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false&serverTimezone=UTC
           username: root
-          password: Aa.654321
+          password: mycp1122
+#          url: jdbc:mysql://94.191.38.143:3306/cspadmin?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance&useSSL=false&serverTimezone=UTC
+ #         username: root
+ #         password: Aa.654321
           #配置初始化大小/最小/最大
           initial-size: 1
           min-idle: 1
@@ -35,6 +50,7 @@ spring:
           #打开PSCache，并指定每个连接上PSCache的大小。oracle设为true，mysql设为false。分库分表较多推荐设置为false
           pool-prepared-statements: false
           max-pool-prepared-statement-per-connection-size: 20
+
 
 mybatis:
   mapper-locations: classpath:com/city/management/collection/mapper/base/*.xml,com/city/management/collection/mapper/ext/*.xml

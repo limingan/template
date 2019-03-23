@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.city.management.collection.mapper.UserInfoMapper">
+	
+	<select id="getUserList" parameterType="string" resultType="HashMap">
+	  	select * from userinfo;
+	</select>
+    <update id="updateUserInfo" parameterType="com.city.management.collection.model.UserInfo">
+        update wis_userinfo set
+        password=#{password},
+        date_updated=now()
+        <!-- 
+        <isNotNull  prepend="," property="username"> 
+        	username=#{userName} 
+        </isNotNull>
+         -->
+        where account_id=#{accountId}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE FROM userinfo WHERE id=#{id}
+    </delete>
+
+    <select id="getUserInfoByName" resultType="com.city.management.collection.model.UserInfo" parameterType="string">
+        select username "userName",password,account_id "accountId",account_type "accountType" 
+        from wis_userinfo where username = #{userName}
+    </select>
+    <select id="getUserInfoById" resultType="com.city.management.collection.model.UserInfo" parameterType="string">
+        select username "userName",password,account_id "accountId",account_type "accountType" 
+        from wis_userinfo where account_id = #{accountId}
+    </select>
+    <select id="getRoleByUsername" parameterType="string" resultType="HashMap">
+	  	select u.username,ur.role_id "roleId" from wis_userinfo u,wis_user_roles ur
+	  	where u.account_id=ur.account_id
+	  	and u.username=#{userName}
+	</select>
+	<select id="getRoleAndPermissionByUsername" parameterType="string" resultType="HashMap">
+	  	select r.role_name "roleName",p.permission_name "permissionName" from wis_userinfo u,wis_user_roles ur,
+	  		wis_role_permission rp,wis_permission p,wis_role r
+	  	where u.account_id=ur.account_id
+	  		and ur.role_id=rp.role_id
+	  		and rp.permission_id=p.permission_id
+	  		and ur.role_id=r.role_id
+	  		and u.username=#{userName}
+	</select>
+
+</mapper>
