@@ -6,10 +6,10 @@
 <mapper namespace="com.city.management.collection.mapper.UserInfoMapper">
 	
 	<select id="getUserList" parameterType="string" resultType="HashMap">
-	  	select * from userinfo;
+	  	select * from cm_userinfo;
 	</select>
     <update id="updateUserInfo" parameterType="com.city.management.collection.model.UserInfo">
-        update wis_userinfo set
+        update cm_userinfo set
         password=#{password},
         date_updated=now()
         <!-- 
@@ -26,20 +26,20 @@
 
     <select id="getUserInfoByName" resultType="com.city.management.collection.model.UserInfo" parameterType="string">
         select username "userName",password,account_id "accountId",account_type "accountType" 
-        from wis_userinfo where username = #{userName}
+        from cm_userinfo where username = #{userName}
     </select>
     <select id="getUserInfoById" resultType="com.city.management.collection.model.UserInfo" parameterType="string">
         select username "userName",password,account_id "accountId",account_type "accountType" 
-        from wis_userinfo where account_id = #{accountId}
+        from cm_userinfo where account_id = #{accountId}
     </select>
     <select id="getRoleByUsername" parameterType="string" resultType="HashMap">
-	  	select u.username,ur.role_id "roleId" from wis_userinfo u,wis_user_roles ur
+	  	select u.username,ur.role_id "roleId" from cm_userinfo u,cm_user_roles ur
 	  	where u.account_id=ur.account_id
 	  	and u.username=#{userName}
 	</select>
 	<select id="getRoleAndPermissionByUsername" parameterType="string" resultType="HashMap">
-	  	select r.role_name "roleName",p.permission_name "permissionName" from wis_userinfo u,wis_user_roles ur,
-	  		wis_role_permission rp,wis_permission p,wis_role r
+	  	select r.role_name "roleName",p.permission_name "permissionName" from cm_userinfo u,cm_user_roles ur,
+	  		cm_role_permission rp,cm_permission p,cm_role r
 	  	where u.account_id=ur.account_id
 	  		and ur.role_id=rp.role_id
 	  		and rp.permission_id=p.permission_id
