@@ -4,13 +4,15 @@ import com.city.management.common.cache.RedisUtil;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Component
 public class RedisSessionDAO extends CachingSessionDAO{
-	
+	@Value("${shiro.redis.cacheManager.expire}")
+	private long expire;
 	public RedisSessionDAO(RedisCacheManager redisCacheManager) {
 		setCacheManager(redisCacheManager);
 	}
@@ -29,7 +31,7 @@ public class RedisSessionDAO extends CachingSessionDAO{
 		Serializable sessionId = generateSessionId(session);
 		System.out.println("调用doCreate:"+sessionId);
 		assignSessionId(session, sessionId);
-//		redisUtil.set(sessionId.toString(), session, expire);
+		redisUtil.set(sessionId.toString(), session, expire);
 		return sessionId;
 	}
 

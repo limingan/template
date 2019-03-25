@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-
+@Deprecated
 @Component
-public class WisdomSessionDAO extends CachingSessionDAO{
+public class CityManagementSessionDAO extends CachingSessionDAO{
 	private static long redisExpire = 600;
 	@Autowired
 	private RedisUtil redisUtil;

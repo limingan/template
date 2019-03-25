@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class WisdomAuthcFilter extends AuthenticationFilter{
+public class CityManagementAuthcFilter extends AuthenticationFilter{
 
 	@Override
 	protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
