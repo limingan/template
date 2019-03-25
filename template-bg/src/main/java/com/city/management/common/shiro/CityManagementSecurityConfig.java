@@ -1,7 +1,6 @@
 package com.city.management.common.shiro;
 
 import org.apache.shiro.mgt.SecurityManager;
-import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
-public class WisdomSecurityConfig {
+public class CityManagementSecurityConfig {
 	@Autowired
-	private AuthorizingRealm wisdomRealm;
+	private CityManagementRealm cityManagementRealm;
 	@Autowired
-	private WisdomSessionManager wisdomSessionManager;
+	private CityManagementSessionManager cityManagementSessionManager;
 	@Autowired
-	private WisdomAuthcFilter wisdomAuthcFilter;
+	private CityManagementAuthcFilter cityManagementAuthcFilter;
 	@Bean
 	public SecurityManager securityManager(){
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -34,8 +33,8 @@ public class WisdomSecurityConfig {
 //		sessionManager.setSessionDAO(redisSessionDAO);
 //		wisdomRealm.setAuthorizationCachingEnabled(true);
 //		wisdomRealm.setAuthenticationCachingEnabled(true);
-		securityManager.setRealm(wisdomRealm);
-		securityManager.setSessionManager(wisdomSessionManager);
+		securityManager.setRealm(cityManagementRealm);
+		securityManager.setSessionManager(cityManagementSessionManager);
 		return securityManager;
 	}
 	@Bean
@@ -43,11 +42,11 @@ public class WisdomSecurityConfig {
 		ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
 		Map<String,String> map = new LinkedHashMap();
 		Map<String, Filter> filters = new LinkedHashMap<String,Filter>();
-		filters.put("wisdomAuthcFilter", wisdomAuthcFilter);
+		filters.put("cityManagementAuthcFilter", cityManagementAuthcFilter);
 		setUnAuthUrl(map);
 		map.put("/collection/logout.do", "logout");
 		map.put("/common/**", "perms[select]");
-//		map.put("/wisdom/**", "wisdomAccessFilter");
+//		map.put("/wisdom/**", "cityManagementAuthcFilter");
 		map.put("/**/*.do", "authc");
 		shiroFilter.setSecurityManager(securityManager());
 		shiroFilter.setLoginUrl("/collection/login.do");
@@ -63,8 +62,8 @@ public class WisdomSecurityConfig {
 		authcMap.put("/collection/login.do", "anon");
 	}
 	@Bean
-	public FilterRegistrationBean registration(WisdomAuthcFilter wisdomAuthcFilter) {
-	    FilterRegistrationBean registration = new FilterRegistrationBean(wisdomAuthcFilter);
+	public FilterRegistrationBean registration(CityManagementAuthcFilter cityManagementAuthcFilter) {
+	    FilterRegistrationBean registration = new FilterRegistrationBean(cityManagementAuthcFilter);
 	    registration.setEnabled(false);
 	    return registration;
 	}
