@@ -13,6 +13,8 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,12 +23,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 @Component
-public class WisdomRealm extends AuthorizingRealm {
-
+public class CityManagementRealm extends AuthorizingRealm {
+	private Logger logger = LoggerFactory.getLogger(CityManagementRealm.class);
 	@Autowired
 	private UserInfoMapper userInfoMapper;
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+		logger.info("调用权限验证方法");
 		if(principals == null || StringUtils.isBlank((String)principals.getPrimaryPrincipal())){
 			return null;
 		}
@@ -45,6 +48,7 @@ public class WisdomRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		logger.info("调用鉴权方法");
 		if(token == null || StringUtils.isBlank((String)token.getPrincipal())){
 			return null;
 		}
