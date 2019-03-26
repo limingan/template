@@ -1,7 +1,7 @@
 package com.city.management.collection.service.impl;
 
-import com.city.management.collection.mapper.UserInfoMapper;
-import com.city.management.collection.model.UserInfo;
+import com.city.management.collection.mapper.UserInfoExtMapper;
+import com.city.management.collection.model.base.UserInfo;
 import com.city.management.collection.service.LoginService;
 import com.city.management.common.cache.UserInfoCaffeine;
 import io.micrometer.core.instrument.util.StringUtils;
@@ -24,13 +24,11 @@ import java.util.Map;
 public class LoginServiceImpl implements LoginService{
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
     @Autowired
-    private UserInfoMapper mapper;
+    private UserInfoExtMapper mapper;
     @Autowired
     private UserInfoCaffeine userInfoCaffeine;
     @Override
     public UserInfo getUserByName(String name) {
-        UserInfo userInfo = userInfoCaffeine.getUserInfo(name);
-        logger.info("ssss"+userInfo.getUserName());
         return userInfoCaffeine.getUserInfoByAccountId(name);
     }
 

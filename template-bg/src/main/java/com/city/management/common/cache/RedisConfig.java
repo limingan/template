@@ -13,8 +13,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 @Configuration
 public class RedisConfig {
 	@Bean
-	 public RedisTemplate<String, Object> getRedisTemplate(RedisConnectionFactory factory) {
-		RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
+	 public RedisTemplate<Object, Object> getRedisTemplate(RedisConnectionFactory factory) {
+		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<Object, Object>();
 		redisTemplate.setConnectionFactory(factory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();

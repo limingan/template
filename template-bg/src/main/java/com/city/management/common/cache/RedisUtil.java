@@ -9,18 +9,20 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisUtil {
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
-	
-	public Object get(String key) {
+	private RedisTemplate<Object, Object> redisTemplate;
+	public Object get(Object key) {
 		return redisTemplate.opsForValue().get(key);
 	}
-	public void set(String key, Object value, long expire){
+//	public Object get(String key) {
+//		return redisTemplate.opsForValue().get(key);
+//	}
+	public void set(Object key, Object value, long expire){
 		redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
 	}
-	public void set(String key, Object value){
+	public void set(Object key, Object value){
 		redisTemplate.opsForValue().set(key, value);
 	}
-	public void del(String key){
+	public void del(Object key){
 		redisTemplate.delete(key);
 	}
 }

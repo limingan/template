@@ -10,27 +10,27 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Set;
 @Component
-public class RedisCache<K extends String,V extends Object> implements Cache<K, V> {
+public class RedisCache<K extends Object,V extends Object> implements Cache<K, V> {
 	
 	@Autowired
 	private RedisUtil redisUtil;
 	@Value("${shiro.redis.cacheManager.expire}")
 	private long expire;
 	@Override
-	public Object get(String paramK) throws CacheException {
+	public Object get(Object paramK) throws CacheException {
 		System.out.println("redisCache get():"+paramK);
 		return redisUtil.get(paramK);
 	}
 
 	@Override
-	public Object put(String paramK, Object paramV) throws CacheException {
+	public Object put(Object paramK, Object paramV) throws CacheException {
 		System.out.println("redisCache put():"+paramK);
 		redisUtil.set(paramK, paramV, expire);
 		return paramV;
 	}
 
 	@Override
-	public Object remove(String paramK) throws CacheException {
+	public Object remove(Object paramK) throws CacheException {
 		System.out.println("redisCache remove():"+paramK);
 		Object value = redisUtil.get(paramK);
 		redisUtil.del(paramK);
@@ -39,25 +39,21 @@ public class RedisCache<K extends String,V extends Object> implements Cache<K, V
 
 	@Override
 	public void clear() throws CacheException {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Set<K> keys() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Collection<V> values() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

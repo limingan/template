@@ -1,6 +1,6 @@
 package com.city.management.collection.service;
 
-import com.city.management.collection.model.UserInfo;
+import com.city.management.collection.model.base.UserInfo;
 
 import java.util.Map;
 

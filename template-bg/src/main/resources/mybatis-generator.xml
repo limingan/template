@@ -38,6 +38,7 @@
         <!--生成对应表及类名-->
         <!--<table/>-->
         <table tableName="cm_permission" domainObjectName="Permission"></table>
+        <table tableName="cm_userinfo" domainObjectName="UserInfo"></table>
         <!--<table tableName="t_commit" domainObjectName="Commit"></table>-->
         <!--<table tableName="t_commit_file" domainObjectName="CommitFile"></table>-->
         <!--<table tableName="issues" domainObjectName="Issues"></table>-->
