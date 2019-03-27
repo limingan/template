@@ -1,4 +1,4 @@
-package com.city.management.collection.mapper;
+package com.city.management.collection.mapper.ext;
 
 import com.city.management.collection.model.base.UserInfo;
 

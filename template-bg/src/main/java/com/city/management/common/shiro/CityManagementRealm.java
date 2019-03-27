@@ -1,6 +1,6 @@
 package com.city.management.common.shiro;
 
-import com.city.management.collection.mapper.UserInfoExtMapper;
+import com.city.management.collection.mapper.ext.UserInfoExtMapper;
 import com.city.management.collection.model.base.UserInfo;
 import com.city.management.collection.service.impl.UserInfoServiceImpl;
 import com.city.management.common.cache.RedisConstants;
