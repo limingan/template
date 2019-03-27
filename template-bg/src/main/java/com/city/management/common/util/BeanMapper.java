@@ -1,5 +1,6 @@
 package com.city.management.common.util;
 
+import com.city.management.collection.model.base.Permission;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
@@ -97,5 +98,17 @@ public class BeanMapper {
         return TypeFactory.valueOf(rawType);
     }
 
+    public static void main(String[] args) {
+        Permission permission = new Permission();
+        permission.setPermissionName("abcdefg");
+
+        Permission copyValue = BeanMapper.map(permission,Permission.class);
+        System.out.println(copyValue);
+
+
+        permission.setPermissionUrl("www.baidu.com");
+        BeanMapper.copy(permission,copyValue);
+        System.out.println(copyValue);
+    }
 
 }
