@@ -2,6 +2,7 @@ package com.city.management.common.shiro;
 
 import com.city.management.collection.mapper.UserInfoExtMapper;
 import com.city.management.collection.model.base.UserInfo;
+import com.city.management.collection.service.impl.UserInfoServiceImpl;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -30,6 +31,8 @@ public class CityManagementRealm extends AuthorizingRealm {
 	}
 	@Autowired
 	private UserInfoExtMapper userInfoExtMapper;
+	@Autowired
+	private UserInfoServiceImpl userInfoService;
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		logger.info("调用权限验证方法");
@@ -56,7 +59,7 @@ public class CityManagementRealm extends AuthorizingRealm {
 			return null;
 		}
 		String userName = (String) token.getPrincipal();
-		UserInfo userInfo = userInfoExtMapper.getUserInfoByName(userName);
+		UserInfo userInfo = userInfoService.getUserInfoByName(userName);
 		if(userInfo == null) {
 			return null;
 		}
