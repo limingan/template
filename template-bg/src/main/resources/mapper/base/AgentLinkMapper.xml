@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.city.management.collection.mapper.base.AgentLinkMapper">
+  <resultMap id="BaseResultMap" type="com.city.management.collection.model.base.AgentLink">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="TENANT_CODE" jdbcType="VARCHAR" property="tenantCode" />
+    <result column="LINK_NAME" jdbcType="VARCHAR" property="linkName" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="LINK_FLAG" jdbcType="VARCHAR" property="linkFlag" />
+    <result column="SHOW_TYPE" jdbcType="VARCHAR" property="showType" />
+    <result column="LINK_URL" jdbcType="VARCHAR" property="linkUrl" />
+    <result column="USED_OF" jdbcType="VARCHAR" property="usedOf" />
+    <result column="LINK_PIC_URL" jdbcType="VARCHAR" property="linkPicUrl" />
+    <result column="WORKNO" jdbcType="VARCHAR" property="workno" />
+    <result column="PARAMS" jdbcType="VARCHAR" property="params" />
+    <result column="SORT" jdbcType="BIGINT" property="sort" />
+    <result column="IS_DELETE" jdbcType="TINYINT" property="isDelete" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, TENANT_CODE, LINK_NAME, CREATE_TIME, LINK_FLAG, SHOW_TYPE, LINK_URL, USED_OF, 
+    LINK_PIC_URL, WORKNO, PARAMS, SORT, IS_DELETE
+  </sql>
+  <select id="selectByExample" parameterType="com.city.management.collection.model.base.AgentLinkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_cms_agent_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cms_agent_link
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_cms_agent_link
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.city.management.collection.model.base.AgentLinkExample">
+    delete from t_cms_agent_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.city.management.collection.model.base.AgentLink">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_cms_agent_link (ID, TENANT_CODE, LINK_NAME, 
+      CREATE_TIME, LINK_FLAG, SHOW_TYPE, 
+      LINK_URL, USED_OF, LINK_PIC_URL, 
+      WORKNO, PARAMS, SORT, 
+      IS_DELETE)
+    values (#{id,jdbcType=INTEGER}, #{tenantCode,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{linkFlag,jdbcType=VARCHAR}, #{showType,jdbcType=VARCHAR}, 
+      #{linkUrl,jdbcType=VARCHAR}, #{usedOf,jdbcType=VARCHAR}, #{linkPicUrl,jdbcType=VARCHAR}, 
+      #{workno,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{sort,jdbcType=BIGINT}, 
+      #{isDelete,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.city.management.collection.model.base.AgentLink">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_cms_agent_link
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="tenantCode != null">
+        TENANT_CODE,
+      </if>
+      <if test="linkName != null">
+        LINK_NAME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="linkFlag != null">
+        LINK_FLAG,
+      </if>
+      <if test="showType != null">
+        SHOW_TYPE,
+      </if>
+      <if test="linkUrl != null">
+        LINK_URL,
+      </if>
+      <if test="usedOf != null">
+        USED_OF,
+      </if>
+      <if test="linkPicUrl != null">
+        LINK_PIC_URL,
+      </if>
+      <if test="workno != null">
+        WORKNO,
+      </if>
+      <if test="params != null">
+        PARAMS,
+      </if>
+      <if test="sort != null">
+        SORT,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="tenantCode != null">
+        #{tenantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null">
+        #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkFlag != null">
+        #{linkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        #{showType,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="usedOf != null">
+        #{usedOf,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPicUrl != null">
+        #{linkPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="workno != null">
+        #{workno,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.city.management.collection.model.base.AgentLinkExample" resultType="java.lang.Long">
+    select count(*) from t_cms_agent_link
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_cms_agent_link
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.tenantCode != null">
+        TENANT_CODE = #{record.tenantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkName != null">
+        LINK_NAME = #{record.linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.linkFlag != null">
+        LINK_FLAG = #{record.linkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showType != null">
+        SHOW_TYPE = #{record.showType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkUrl != null">
+        LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usedOf != null">
+        USED_OF = #{record.usedOf,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkPicUrl != null">
+        LINK_PIC_URL = #{record.linkPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workno != null">
+        WORKNO = #{record.workno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null">
+        PARAMS = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        SORT = #{record.sort,jdbcType=BIGINT},
+      </if>
+      <if test="record.isDelete != null">
+        IS_DELETE = #{record.isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_cms_agent_link
+    set ID = #{record.id,jdbcType=INTEGER},
+      TENANT_CODE = #{record.tenantCode,jdbcType=VARCHAR},
+      LINK_NAME = #{record.linkName,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      LINK_FLAG = #{record.linkFlag,jdbcType=VARCHAR},
+      SHOW_TYPE = #{record.showType,jdbcType=VARCHAR},
+      LINK_URL = #{record.linkUrl,jdbcType=VARCHAR},
+      USED_OF = #{record.usedOf,jdbcType=VARCHAR},
+      LINK_PIC_URL = #{record.linkPicUrl,jdbcType=VARCHAR},
+      WORKNO = #{record.workno,jdbcType=VARCHAR},
+      PARAMS = #{record.params,jdbcType=VARCHAR},
+      SORT = #{record.sort,jdbcType=BIGINT},
+      IS_DELETE = #{record.isDelete,jdbcType=TINYINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.city.management.collection.model.base.AgentLink">
+    update t_cms_agent_link
+    <set>
+      <if test="tenantCode != null">
+        TENANT_CODE = #{tenantCode,jdbcType=VARCHAR},
+      </if>
+      <if test="linkName != null">
+        LINK_NAME = #{linkName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkFlag != null">
+        LINK_FLAG = #{linkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="showType != null">
+        SHOW_TYPE = #{showType,jdbcType=VARCHAR},
+      </if>
+      <if test="linkUrl != null">
+        LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="usedOf != null">
+        USED_OF = #{usedOf,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPicUrl != null">
+        LINK_PIC_URL = #{linkPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="workno != null">
+        WORKNO = #{workno,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        PARAMS = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        SORT = #{sort,jdbcType=BIGINT},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.city.management.collection.model.base.AgentLink">
+    update t_cms_agent_link
+    set TENANT_CODE = #{tenantCode,jdbcType=VARCHAR},
+      LINK_NAME = #{linkName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LINK_FLAG = #{linkFlag,jdbcType=VARCHAR},
+      SHOW_TYPE = #{showType,jdbcType=VARCHAR},
+      LINK_URL = #{linkUrl,jdbcType=VARCHAR},
+      USED_OF = #{usedOf,jdbcType=VARCHAR},
+      LINK_PIC_URL = #{linkPicUrl,jdbcType=VARCHAR},
+      WORKNO = #{workno,jdbcType=VARCHAR},
+      PARAMS = #{params,jdbcType=VARCHAR},
+      SORT = #{sort,jdbcType=BIGINT},
+      IS_DELETE = #{isDelete,jdbcType=TINYINT}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
