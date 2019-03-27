@@ -1,7 +1,8 @@
 package com.city.management.common.shiro;
 
-import com.city.management.collection.mapper.UserInfoMapper;
-import com.city.management.collection.model.UserInfo;
+import com.city.management.collection.mapper.UserInfoExtMapper;
+import com.city.management.collection.model.base.UserInfo;
+import com.city.management.collection.service.impl.UserInfoServiceImpl;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -25,8 +26,13 @@ import java.util.Set;
 @Component
 public class CityManagementRealm extends AuthorizingRealm {
 	private Logger logger = LoggerFactory.getLogger(CityManagementRealm.class);
+	public CityManagementRealm(RedisCacheManager cacheManager){
+		super.setCacheManager(cacheManager);
+	}
 	@Autowired
-	private UserInfoMapper userInfoMapper;
+	private UserInfoExtMapper userInfoExtMapper;
+	@Autowired
+	private UserInfoServiceImpl userInfoService;
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		logger.info("调用权限验证方法");
@@ -34,7 +40,7 @@ public class CityManagementRealm extends AuthorizingRealm {
 			return null;
 		}
 		String username = (String)principals.getPrimaryPrincipal();//获取当前用户
-		List<Map<String,Object>> rolePermissionList = userInfoMapper.getRoleAndPermissionByUsername(username);
+		List<Map<String,Object>> rolePermissionList = userInfoExtMapper.getRoleAndPermissionByUsername(username);
 		Set<String> permissions = new HashSet<String>();
 		if(CollectionUtils.isNotEmpty(rolePermissionList)){
 			for(Map<String,Object> roleMap : rolePermissionList) {
@@ -53,12 +59,12 @@ public class CityManagementRealm extends AuthorizingRealm {
 			return null;
 		}
 		String userName = (String) token.getPrincipal();
-		UserInfo userInfo = userInfoMapper.getUserInfoByName(userName);
+		UserInfo userInfo = userInfoService.getUserInfoByName(userName);
 		if(userInfo == null) {
 			return null;
 		}
-		return new SimpleAuthenticationInfo(userInfo.getUserName(), userInfo.getPassword(), 
-				ByteSource.Util.bytes(userInfo.getUserName()), getName() );
+		return new SimpleAuthenticationInfo(userInfo.getUsername(), userInfo.getPassword(),
+				ByteSource.Util.bytes(userInfo.getUsername()), getName() );
 	}
 
 }

@@ -1,8 +1,13 @@
 package com.city.management.common.shiro;
 
+import com.city.management.collection.model.base.Permission;
+import com.city.management.collection.service.impl.PermissionServiceImpl;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -10,10 +15,14 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 @Configuration
 public class CityManagementSecurityConfig {
+	private Logger logger = LoggerFactory.getLogger(CityManagementSecurityConfig.class);
+	@Autowired
+	private PermissionServiceImpl permissionService;
 	@Autowired
 	private CityManagementRealm cityManagementRealm;
 	@Autowired
@@ -31,8 +40,7 @@ public class CityManagementSecurityConfig {
 //		sessionManager.setCacheManager(redisCacheManager);
 //		redisSessionDAO.setCacheManager(redisCacheManager);
 //		sessionManager.setSessionDAO(redisSessionDAO);
-//		wisdomRealm.setAuthorizationCachingEnabled(true);
-//		wisdomRealm.setAuthenticationCachingEnabled(true);
+		cityManagementRealm.setAuthorizationCachingEnabled(true);
 		securityManager.setRealm(cityManagementRealm);
 		securityManager.setSessionManager(cityManagementSessionManager);
 		return securityManager;
@@ -44,6 +52,7 @@ public class CityManagementSecurityConfig {
 		Map<String, Filter> filters = new LinkedHashMap<String,Filter>();
 		filters.put("cityManagementAuthcFilter", cityManagementAuthcFilter);
 		setUnAuthUrl(map);
+		setPerms(map);
 		map.put("/collection/logout.do", "logout");
 		map.put("/common/**", "perms[select]");
 //		map.put("/wisdom/**", "cityManagementAuthcFilter");
@@ -56,10 +65,19 @@ public class CityManagementSecurityConfig {
 		return shiroFilter;
 	}
 	//从配置文件中获取不需要验权的url
-	private void setUnAuthUrl(Map<String,String> authcMap){
-		authcMap.put("/templates/*", "anon");
-		authcMap.put("/favicon.ico", "anon");
-		authcMap.put("/collection/login.do", "anon");
+	private void setUnAuthUrl(Map<String,String> filterChainMap){
+		filterChainMap.put("/templates/*", "anon");
+		filterChainMap.put("/favicon.ico", "anon");
+		filterChainMap.put("/collection/login.do", "anon");
+	}
+	private void setPerms(Map<String,String> filterChainMap){
+		List<Permission> permList = permissionService.queryAll();
+		if(CollectionUtils.isNotEmpty(permList)){
+			for(Permission perm : permList){
+				filterChainMap.put(perm.getPermissionUrl(),"perms["+perm.getPermissionName()+"]");
+			}
+		}
+		logger.info("perms:" + permList);
 	}
 	@Bean
 	public FilterRegistrationBean registration(CityManagementAuthcFilter cityManagementAuthcFilter) {

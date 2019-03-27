@@ -1,7 +1,7 @@
 package com.city.management.common.cache;
 
-import com.city.management.collection.mapper.UserInfoMapper;
-import com.city.management.collection.model.UserInfo;
+import com.city.management.collection.mapper.UserInfoExtMapper;
+import com.city.management.collection.model.base.UserInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +18,11 @@ public class UserInfoCaffeine {
 	private Logger logger = LoggerFactory.getLogger(UserInfoCaffeine.class);
 	private UserInfo userInfo;
 	@Autowired
-	private UserInfoMapper mapper;
+	private UserInfoExtMapper mapper;
 	@Cacheable(value="commonCaffeine", key="'userinfo'+#accountId")
 	public UserInfo getUserInfoByAccountId(String accountId){
 		logger.info("从缓存获取不到，改为查数据库");
-		//模拟从数据库获取
-		userInfo = new UserInfo();
-		userInfo.setUserId("id");
-		userInfo.setUserName("name");
-		//userInfo = mapper.getUserInfoById(accountId);
+		userInfo = mapper.getUserInfoById(accountId);
 		logger.info("从缓存获取不到，查数据库成功"+userInfo);
 		return userInfo;
 	}
@@ -45,11 +41,7 @@ public class UserInfoCaffeine {
 	@Cacheable(value="commonCaffeine22", key="'userinfo22'+#accountId")
 	public UserInfo getUserInfo(String accountId){
 		logger.info("从缓存获取不到，改为查数据库33");
-		//模拟从数据库获取
-		userInfo = new UserInfo();
-		userInfo.setUserId("id22");
-		userInfo.setUserName("name22");
-		//userInfo = mapper.getUserInfoById(accountId);
+		userInfo = mapper.getUserInfoById(accountId);
 		logger.info("从缓存获取不到，查数据库成功33"+userInfo);
 		return userInfo;
 	}
