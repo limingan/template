@@ -1,6 +1,5 @@
 package com.city.management.common.shiro;
 
-import com.city.management.collection.mapper.UserInfoExtMapper;
 import com.city.management.collection.model.base.UserInfo;
 import com.city.management.collection.service.impl.UserInfoServiceImpl;
 import com.city.management.common.cache.RedisConstants;
@@ -29,8 +28,6 @@ import java.util.Set;
 public class CityManagementRealm extends AuthorizingRealm {
 	private Logger logger = LoggerFactory.getLogger(CityManagementRealm.class);
 	@Autowired
-	private UserInfoExtMapper userInfoExtMapper;
-	@Autowired
 	private UserInfoServiceImpl userInfoService;
 	@Autowired
 	private RedisUtil redisUtil;
@@ -46,7 +43,7 @@ public class CityManagementRealm extends AuthorizingRealm {
 		Set<String> permissions  = (Set<String>)redisUtil.get(key);
 		if(CollectionUtils.isEmpty(permissions)) {
 			permissions = new HashSet<String>();
-			List<Map<String, Object>> rolePermissionList = userInfoExtMapper.getPermissionByUsername(username);
+			List<Map<String, Object>> rolePermissionList = userInfoService.getPermissionByUsername(username);
 			if (CollectionUtils.isNotEmpty(rolePermissionList)) {
 				for (Map<String, Object> roleMap : rolePermissionList) {
 					permissions.add((String) roleMap.get("permissionName"));

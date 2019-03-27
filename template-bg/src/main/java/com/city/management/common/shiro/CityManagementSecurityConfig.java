@@ -29,6 +29,8 @@ public class CityManagementSecurityConfig {
 	private CityManagementSessionManager cityManagementSessionManager;
 	@Autowired
 	private CityManagementAuthcFilter cityManagementAuthcFilter;
+	@Autowired
+	private CityManagementPermissionFilter cityManagementPermissionFilter;
 	@Bean
 	public SecurityManager securityManager(){
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -50,13 +52,12 @@ public class CityManagementSecurityConfig {
 		ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
 		Map<String,String> map = new LinkedHashMap();
 		Map<String, Filter> filters = new LinkedHashMap<String,Filter>();
-		filters.put("cityManagementAuthcFilter", cityManagementAuthcFilter);
+		filters.put("cmAuthc", cityManagementAuthcFilter);
+		filters.put("cmPerm", cityManagementPermissionFilter);
 		setUnAuthUrl(map);
 		setPerms(map);
 		map.put("/collection/logout.do", "logout");
-		map.put("/common/**", "perms[select]");
-//		map.put("/wisdom/**", "cityManagementAuthcFilter");
-		map.put("/**/*.do", "authc");
+		map.put("/**/*.do", "cmAuthc");
 		shiroFilter.setSecurityManager(securityManager());
 		shiroFilter.setLoginUrl("/collection/login.do");
 		shiroFilter.setUnauthorizedUrl("/agentlink/list.do");
@@ -66,8 +67,10 @@ public class CityManagementSecurityConfig {
 	}
 	//从配置文件中获取不需要验权的url
 	private void setUnAuthUrl(Map<String,String> filterChainMap){
-		filterChainMap.put("/templates/*", "anon");
-		filterChainMap.put("/favicon.ico", "anon");
+		filterChainMap.put("*.css", "anon");
+		filterChainMap.put("*.js", "anon");
+		filterChainMap.put("*.ico", "anon");
+		filterChainMap.put("*.png", "anon");
 		filterChainMap.put("/collection/login.do", "anon");
 		filterChainMap.put("/agentlink/list.do", "anon");
 
@@ -76,7 +79,7 @@ public class CityManagementSecurityConfig {
 		List<Permission> permList = permissionService.queryAll();
 		if(CollectionUtils.isNotEmpty(permList)){
 			for(Permission perm : permList){
-				filterChainMap.put(perm.getPermissionUrl(),"perms["+perm.getPermissionName()+"]");
+				filterChainMap.put(perm.getPermissionUrl(),"cmPerm["+perm.getPermissionName()+"]");
 			}
 		}
 		logger.info("perms:" + permList);
