@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -88,20 +89,6 @@ public class UserInfo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", accountId=").append(accountId);
-        sb.append(", accountType=").append(accountType);
-        sb.append(", dateCreated=").append(dateCreated);
-        sb.append(", dateUpdated=").append(dateUpdated);
-        sb.append(", createdBy=").append(createdBy);
-        sb.append(", updatedBy=").append(updatedBy);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

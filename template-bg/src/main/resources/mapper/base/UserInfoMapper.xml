@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.city.management.collection.mapper.base.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.city.management.collection.model.base.Permission">
-    <result column="permission_id" jdbcType="VARCHAR" property="permissionId" />
-    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
-    <result column="permission_url" jdbcType="VARCHAR" property="permissionUrl" />
-    <result column="permission_type" jdbcType="CHAR" property="permissionType" />
+<mapper namespace="com.city.management.collection.mapper.base.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.city.management.collection.model.base.UserInfo">
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="account_id" jdbcType="VARCHAR" property="accountId" />
+    <result column="account_type" jdbcType="VARCHAR" property="accountType" />
     <result column="date_created" jdbcType="TIMESTAMP" property="dateCreated" />
     <result column="date_updated" jdbcType="TIMESTAMP" property="dateUpdated" />
     <result column="created_by" jdbcType="VARCHAR" property="createdBy" />
@@ -70,16 +70,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    permission_id, permission_name, permission_url, permission_type, date_created, date_updated, 
-    created_by, updated_by
+    username, password, account_id, account_type, date_created, date_updated, created_by, 
+    updated_by
   </sql>
-  <select id="selectByExample" parameterType="com.city.management.collection.model.base.PermissionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.city.management.collection.model.base.UserInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from cm_permission
+    from cm_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,34 +95,34 @@
       </if>
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.city.management.collection.model.base.PermissionExample">
-    delete from cm_permission
+  <delete id="deleteByExample" parameterType="com.city.management.collection.model.base.UserInfoExample">
+    delete from cm_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.city.management.collection.model.base.Permission">
-    insert into cm_permission (permission_id, permission_name, permission_url, 
-      permission_type, date_created, date_updated, 
+  <insert id="insert" parameterType="com.city.management.collection.model.base.UserInfo">
+    insert into cm_userinfo (username, password, account_id, 
+      account_type, date_created, date_updated, 
       created_by, updated_by)
-    values (#{permissionId,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, #{permissionUrl,jdbcType=VARCHAR}, 
-      #{permissionType,jdbcType=CHAR}, #{dateCreated,jdbcType=TIMESTAMP}, #{dateUpdated,jdbcType=TIMESTAMP}, 
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{accountId,jdbcType=VARCHAR}, 
+      #{accountType,jdbcType=VARCHAR}, #{dateCreated,jdbcType=TIMESTAMP}, #{dateUpdated,jdbcType=TIMESTAMP}, 
       #{createdBy,jdbcType=VARCHAR}, #{updatedBy,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.city.management.collection.model.base.Permission">
-    insert into cm_permission
+  <insert id="insertSelective" parameterType="com.city.management.collection.model.base.UserInfo">
+    insert into cm_userinfo
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="permissionId != null">
-        permission_id,
+      <if test="username != null">
+        username,
       </if>
-      <if test="permissionName != null">
-        permission_name,
+      <if test="password != null">
+        password,
       </if>
-      <if test="permissionUrl != null">
-        permission_url,
+      <if test="accountId != null">
+        account_id,
       </if>
-      <if test="permissionType != null">
-        permission_type,
+      <if test="accountType != null">
+        account_type,
       </if>
       <if test="dateCreated != null">
         date_created,
@@ -138,17 +138,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="permissionId != null">
-        #{permissionId,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="permissionName != null">
-        #{permissionName,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="permissionUrl != null">
-        #{permissionUrl,jdbcType=VARCHAR},
+      <if test="accountId != null">
+        #{accountId,jdbcType=VARCHAR},
       </if>
-      <if test="permissionType != null">
-        #{permissionType,jdbcType=CHAR},
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="dateCreated != null">
         #{dateCreated,jdbcType=TIMESTAMP},
@@ -164,26 +164,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.city.management.collection.model.base.PermissionExample" resultType="java.lang.Long">
-    select count(*) from cm_permission
+  <select id="countByExample" parameterType="com.city.management.collection.model.base.UserInfoExample" resultType="java.lang.Long">
+    select count(*) from cm_userinfo
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update cm_permission
+    update cm_userinfo
     <set>
-      <if test="record.permissionId != null">
-        permission_id = #{record.permissionId,jdbcType=VARCHAR},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.permissionName != null">
-        permission_name = #{record.permissionName,jdbcType=VARCHAR},
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.permissionUrl != null">
-        permission_url = #{record.permissionUrl,jdbcType=VARCHAR},
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=VARCHAR},
       </if>
-      <if test="record.permissionType != null">
-        permission_type = #{record.permissionType,jdbcType=CHAR},
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=VARCHAR},
       </if>
       <if test="record.dateCreated != null">
         date_created = #{record.dateCreated,jdbcType=TIMESTAMP},
@@ -203,11 +203,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update cm_permission
-    set permission_id = #{record.permissionId,jdbcType=VARCHAR},
-      permission_name = #{record.permissionName,jdbcType=VARCHAR},
-      permission_url = #{record.permissionUrl,jdbcType=VARCHAR},
-      permission_type = #{record.permissionType,jdbcType=CHAR},
+    update cm_userinfo
+    set username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=VARCHAR},
+      account_type = #{record.accountType,jdbcType=VARCHAR},
       date_created = #{record.dateCreated,jdbcType=TIMESTAMP},
       date_updated = #{record.dateUpdated,jdbcType=TIMESTAMP},
       created_by = #{record.createdBy,jdbcType=VARCHAR},

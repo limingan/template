@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -88,20 +89,6 @@ public class Permission implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", permissionId=").append(permissionId);
-        sb.append(", permissionName=").append(permissionName);
-        sb.append(", permissionUrl=").append(permissionUrl);
-        sb.append(", permissionType=").append(permissionType);
-        sb.append(", dateCreated=").append(dateCreated);
-        sb.append(", dateUpdated=").append(dateUpdated);
-        sb.append(", createdBy=").append(createdBy);
-        sb.append(", updatedBy=").append(updatedBy);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

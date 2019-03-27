@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -98,21 +99,6 @@ public class Phrases implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", pid=").append(pid);
-        sb.append(", status=").append(status);
-        sb.append(", name=").append(name);
-        sb.append(", seq=").append(seq);
-        sb.append(", createon=").append(createon);
-        sb.append(", tenantcode=").append(tenantcode);
-        sb.append(", type=").append(type);
-        sb.append(", workid=").append(workid);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

@@ -1,10 +1,10 @@
-package com.city.management.collection.model.base;
+package com.city.management.collection.model.query;
 
 import com.alibaba.fastjson.JSONObject;
-import java.io.Serializable;
+
 import java.util.Date;
 
-public class AgentLink implements Serializable {
+public class AgentLinkQuery extends PageQuery {
     private Integer id;
 
     private String tenantCode;

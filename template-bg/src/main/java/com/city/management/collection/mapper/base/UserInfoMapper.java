@@ -2,9 +2,8 @@ package com.city.management.collection.mapper.base;
 
 import com.city.management.collection.model.base.UserInfo;
 import com.city.management.collection.model.base.UserInfoExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserInfoMapper {
     long countByExample(UserInfoExample example);

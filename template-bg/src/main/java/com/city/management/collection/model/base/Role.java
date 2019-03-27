@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -108,22 +109,6 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", roleName=").append(roleName);
-        sb.append(", roleCode=").append(roleCode);
-        sb.append(", extCode=").append(extCode);
-        sb.append(", type=").append(type);
-        sb.append(", strategy=").append(strategy);
-        sb.append(", parentId=").append(parentId);
-        sb.append(", description=").append(description);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

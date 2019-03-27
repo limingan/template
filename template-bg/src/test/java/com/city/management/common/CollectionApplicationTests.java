@@ -12,7 +12,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CollectionnApplicationTests {
+public class CollectionApplicationTests {
 
     @Autowired
     PermissionService permissionService;

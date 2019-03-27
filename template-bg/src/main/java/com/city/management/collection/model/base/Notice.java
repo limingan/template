@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -208,32 +209,6 @@ public class Notice implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", tenantId=").append(tenantId);
-        sb.append(", title=").append(title);
-        sb.append(", sendTime=").append(sendTime);
-        sb.append(", filePath=").append(filePath);
-        sb.append(", beginTime=").append(beginTime);
-        sb.append(", isSend=").append(isSend);
-        sb.append(", status=").append(status);
-        sb.append(", endTime=").append(endTime);
-        sb.append(", sender=").append(sender);
-        sb.append(", createSender=").append(createSender);
-        sb.append(", acceptType=").append(acceptType);
-        sb.append(", acceptUsers=").append(acceptUsers);
-        sb.append(", acceptNames=").append(acceptNames);
-        sb.append(", channelType=").append(channelType);
-        sb.append(", senderName=").append(senderName);
-        sb.append(", istop=").append(istop);
-        sb.append(", noticetype=").append(noticetype);
-        sb.append(", isurgency=").append(isurgency);
-        sb.append(", content=").append(content);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 @SpringBootApplication(scanBasePackages="com.city.management")
 @MapperScan("com.**.mapper")
-public class CollectionnApplication {
+public class CollectionApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CollectionnApplication.class, args);
+		SpringApplication.run(CollectionApplication.class, args);
 	}
 
 }
