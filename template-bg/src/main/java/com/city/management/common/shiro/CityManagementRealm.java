@@ -3,6 +3,8 @@ package com.city.management.common.shiro;
 import com.city.management.collection.mapper.UserInfoExtMapper;
 import com.city.management.collection.model.base.UserInfo;
 import com.city.management.collection.service.impl.UserInfoServiceImpl;
+import com.city.management.common.cache.RedisConstants;
+import com.city.management.common.cache.RedisUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -26,13 +28,12 @@ import java.util.Set;
 @Component
 public class CityManagementRealm extends AuthorizingRealm {
 	private Logger logger = LoggerFactory.getLogger(CityManagementRealm.class);
-	public CityManagementRealm(RedisCacheManager cacheManager){
-		super.setCacheManager(cacheManager);
-	}
 	@Autowired
 	private UserInfoExtMapper userInfoExtMapper;
 	@Autowired
 	private UserInfoServiceImpl userInfoService;
+	@Autowired
+	private RedisUtil redisUtil;
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		logger.info("调用权限验证方法");
@@ -40,12 +41,18 @@ public class CityManagementRealm extends AuthorizingRealm {
 			return null;
 		}
 		String username = (String)principals.getPrimaryPrincipal();//获取当前用户
-		List<Map<String,Object>> rolePermissionList = userInfoExtMapper.getRoleAndPermissionByUsername(username);
-		Set<String> permissions = new HashSet<String>();
-		if(CollectionUtils.isNotEmpty(rolePermissionList)){
-			for(Map<String,Object> roleMap : rolePermissionList) {
-				permissions.add((String)roleMap.get("permissionName"));
+
+		String key = RedisConstants.PERMISSION.getKey() + username;
+		Set<String> permissions  = (Set<String>)redisUtil.get(key);
+		if(CollectionUtils.isEmpty(permissions)) {
+			permissions = new HashSet<String>();
+			List<Map<String, Object>> rolePermissionList = userInfoExtMapper.getPermissionByUsername(username);
+			if (CollectionUtils.isNotEmpty(rolePermissionList)) {
+				for (Map<String, Object> roleMap : rolePermissionList) {
+					permissions.add((String) roleMap.get("permissionName"));
+				}
 			}
+			redisUtil.set(key, permissions,RedisConstants.PERMISSION.getExpire());
 		}
 		SimpleAuthorizationInfo authorization = new SimpleAuthorizationInfo();
 		authorization.addStringPermissions(permissions);

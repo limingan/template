@@ -40,7 +40,7 @@ public class CityManagementSecurityConfig {
 //		sessionManager.setCacheManager(redisCacheManager);
 //		redisSessionDAO.setCacheManager(redisCacheManager);
 //		sessionManager.setSessionDAO(redisSessionDAO);
-		cityManagementRealm.setAuthorizationCachingEnabled(true);
+//		cityManagementRealm.setAuthorizationCachingEnabled(true);在ream实现里使用缓存
 		securityManager.setRealm(cityManagementRealm);
 		securityManager.setSessionManager(cityManagementSessionManager);
 		return securityManager;

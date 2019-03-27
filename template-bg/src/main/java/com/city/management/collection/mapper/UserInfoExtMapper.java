@@ -11,5 +11,5 @@ import java.util.Map;
 public interface UserInfoExtMapper {
     public UserInfo getUserInfoByName(String name);
     public List<Map<String,Object>> getRoleByUsername(String username);
-    public List<Map<String,Object>> getRoleAndPermissionByUsername(String username);
+    public List<Map<String,Object>> getPermissionByUsername(String username);
 }

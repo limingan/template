@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.city.management.collection.mapper.UserInfoExtMapper">
+    <select id="getPermissionByUsername" parameterType="java.lang.String" resultType="java.util.Map">
+      select p.permission_name "permissionName"
+      from cm_userinfo u,cm_user_roles ur,cm_role_permission rp,cm_permission p
+      where ur.role_id=rp.role_id and rp.permission_id=p.permission_id
+        and ur.account_id=u.account_id
+        and u.username=#{username}
+    </select>
+</mapper>
