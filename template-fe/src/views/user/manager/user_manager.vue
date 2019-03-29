@@ -69,62 +69,62 @@ export default {
         userName: ''
       },
       userItems: [{
-        'email': 'xxxxx@ucar.com',
+        'email': 'xxxxx@qq.com',
         'nickName': '昵称1',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx2@ucar.com',
+        'email': 'xxxxx2@qq.com',
         'nickName': '昵称2',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx3@ucar.com',
+        'email': 'xxxxx3@qq.com',
         'nickName': '昵称3',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx4@ucar.com',
+        'email': 'xxxxx4@qq.com',
         'nickName': '昵称4',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx5@ucar.com',
+        'email': 'xxxxx5@qq.com',
         'nickName': '昵称5',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx6@ucar.com',
+        'email': 'xxxxx6@qq.com',
         'nickName': '昵称6',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx7@ucar.com',
+        'email': 'xxxxx7@qq.com',
         'nickName': '昵称7',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx8@ucar.com',
+        'email': 'xxxxx8@qq.com',
         'nickName': '昵称8',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx9@ucar.com',
+        'email': 'xxxxx9@qq.com',
         'nickName': '昵称9',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx10@ucar.com',
+        'email': 'xxxxx10@qq.com',
         'nickName': '昵称10',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx11@ucar.com',
+        'email': 'xxxxx11@qq.com',
         'nickName': '昵称11',
         'role': '普通会员'
       },
       {
-        'email': 'xxxxx12@ucar.com',
+        'email': 'xxxxx12@qq.com',
         'nickName': '昵称12',
         'role': '普通会员'
       }]

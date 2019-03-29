@@ -46,7 +46,6 @@
         </el-form-item>
         <el-form-item label="所属类目">
           <el-select v-model="form.categoryId" placeholder="请选择类目">
-            <el-option label="神州优出" value="ucar"></el-option>
             <el-option label="用户反馈" value="user"></el-option>
           </el-select>
         </el-form-item>

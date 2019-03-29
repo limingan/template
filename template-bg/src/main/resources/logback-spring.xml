@@ -82,7 +82,7 @@
 
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
-        <logger name="com.ucar.sonar" level="debug"/>
+        <logger name="com.city.management" level="debug"/>
     </springProfile>
 
     <root level="info">

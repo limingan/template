@@ -170,17 +170,17 @@
           label: '女'
         }]
         , domainList: [{
-          value: 'ucarinc.com',
-          label: 'ucarinc.com'
+          value: 'abc.com',
+          label: 'abc.com'
         }, {
-          value: 'zuche.com',
-          label: 'zuche.com'
+          value: 'acb.com',
+          label: 'acb.com'
         }, {
-          value: 'luckincoffee.com',
-          label: 'luckincoffee.com'
+          value: 'bac.com',
+          label: 'bac.com'
         }, {
-          value: 'lucky.com',
-          label: 'lucky.com'
+          value: 'bca.com',
+          label: 'bca.com'
         }]
         , dictTypes: []
       }
