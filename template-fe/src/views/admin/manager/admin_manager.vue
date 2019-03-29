@@ -67,7 +67,7 @@
     <el-dialog title="新增管理员" :visible.sync="addAdminDialogVisible" width="30%" :before-close="handleClose">
       <el-form ref="form" label-width="80px">
           <el-form-item label="邮箱">
-              <el-input value="admin99@ucarinc.com">ucarinc.com</el-input>
+              <el-input value="admin99@qq.com">qq.com</el-input>
           </el-form-item>
           <el-form-item label="所有启用">
             <el-checkbox style="margin-left:0px" label="备选项1" border></el-checkbox>

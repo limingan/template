@@ -13,7 +13,7 @@ module.exports = {
 
     proxyTable: {
       '/api': {
-        target: 'http://admintest.csp.ucarinc.com/cspadmin',
+        target: 'http://admintest.csp.qq.com/cspadmin',
         changeOrigin: true,
         pathRewrite: {
           '^/api/': '/api/'

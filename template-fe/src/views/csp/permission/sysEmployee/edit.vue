@@ -107,7 +107,7 @@
           isDeleted: '',
           createTime: '',
           updateTime: '',
-          domain: 'ucarinc.com'
+          domain: 'qq.com'
         },
         rules: {
           number: [{
