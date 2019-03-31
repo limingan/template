@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -168,28 +169,6 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", deptId=").append(deptId);
-        sb.append(", number=").append(number);
-        sb.append(", name=").append(name);
-        sb.append(", loginId=").append(loginId);
-        sb.append(", telephone=").append(telephone);
-        sb.append(", gender=").append(gender);
-        sb.append(", email=").append(email);
-        sb.append(", workNo=").append(workNo);
-        sb.append(", extensionNumber=").append(extensionNumber);
-        sb.append(", password=").append(password);
-        sb.append(", description=").append(description);
-        sb.append(", status=").append(status);
-        sb.append(", isDeleted=").append(isDeleted);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

@@ -60,7 +60,7 @@ public class CityManagementSecurityConfig {
 		map.put("/**/*.do", "cmAuthc");
 		shiroFilter.setSecurityManager(securityManager());
 		shiroFilter.setLoginUrl("/collection/login.do");
-		shiroFilter.setUnauthorizedUrl("/collection/unAuth.do");
+		shiroFilter.setUnauthorizedUrl("/agentlink/list.do");
 		shiroFilter.setFilters(filters);
 		shiroFilter.setFilterChainDefinitionMap(map);
 		return shiroFilter;
@@ -72,6 +72,8 @@ public class CityManagementSecurityConfig {
 		filterChainMap.put("*.ico", "anon");
 		filterChainMap.put("*.png", "anon");
 		filterChainMap.put("/collection/login.do", "anon");
+		filterChainMap.put("/agentlink/list.do", "anon");
+
 	}
 	private void setPerms(Map<String,String> filterChainMap){
 		List<Permission> permList = permissionService.queryAll();

@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -108,22 +109,6 @@ public class Uploadinfo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", projectid=").append(projectid);
-        sb.append(", filetype=").append(filetype);
-        sb.append(", filename=").append(filename);
-        sb.append(", filepath=").append(filepath);
-        sb.append(", filesize=").append(filesize);
-        sb.append(", createtime=").append(createtime);
-        sb.append(", remark=").append(remark);
-        sb.append(", realName=").append(realName);
-        sb.append(", tenantCode=").append(tenantCode);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }

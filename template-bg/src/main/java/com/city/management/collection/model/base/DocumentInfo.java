@@ -1,5 +1,6 @@
 package com.city.management.collection.model.base;
 
+import com.alibaba.fastjson.JSONObject;
 import java.io.Serializable;
 
 public class DocumentInfo implements Serializable {
@@ -67,18 +68,6 @@ public class DocumentInfo implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", uploadId=").append(uploadId);
-        sb.append(", classId=").append(classId);
-        sb.append(", workNo=").append(workNo);
-        sb.append(", type=").append(type);
-        sb.append(", desc=").append(desc);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return JSONObject.toJSONString(this);
     }
 }
