@@ -2,7 +2,7 @@ package com.city.management.common.shiro;
 
 import com.city.management.collection.model.base.UserInfo;
 import com.city.management.collection.service.impl.UserInfoServiceImpl;
-import com.city.management.common.cache.RedisConstants;
+import com.city.management.common.cache.CacheConstants;
 import com.city.management.common.cache.RedisUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -39,7 +39,7 @@ public class CityManagementRealm extends AuthorizingRealm {
 		}
 		String username = (String)principals.getPrimaryPrincipal();//获取当前用户
 
-		String key = RedisConstants.PERMISSION.getKey() + username;
+		String key = CacheConstants.CacheEnum.PERMISSION.getKey() + username;
 		Set<String> permissions  = (Set<String>)redisUtil.get(key);
 		if(CollectionUtils.isEmpty(permissions)) {
 			permissions = new HashSet<String>();
@@ -49,7 +49,8 @@ public class CityManagementRealm extends AuthorizingRealm {
 					permissions.add((String) roleMap.get("permissionName"));
 				}
 			}
-			redisUtil.set(key, permissions,RedisConstants.PERMISSION.getExpire());
+			//测试环境关闭缓存，生产环境打开
+			//redisUtil.set(key, permissions, CacheConstants.CacheEnum.PERMISSION.getExpire());
 		}
 		SimpleAuthorizationInfo authorization = new SimpleAuthorizationInfo();
 		authorization.addStringPermissions(permissions);

@@ -13,9 +13,6 @@ public class RedisUtil {
 	public Object get(Object key) {
 		return redisTemplate.opsForValue().get(key);
 	}
-//	public Object get(String key) {
-//		return redisTemplate.opsForValue().get(key);
-//	}
 	public void set(Object key, Object value, long expire){
 		redisTemplate.opsForValue().set(key, value, expire, TimeUnit.SECONDS);
 	}
@@ -24,5 +21,14 @@ public class RedisUtil {
 	}
 	public void del(Object key){
 		redisTemplate.delete(key);
+	}
+	public boolean exists(String key){
+		return redisTemplate.hasKey(key);
+	}
+	public long incr(String key){
+		return redisTemplate.opsForValue().increment(key);
+	}
+	public long decr(String key){
+		return redisTemplate.opsForValue().decrement(key);
 	}
 }

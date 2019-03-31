@@ -88,4 +88,10 @@ public class CityManagementSecurityConfig {
 	    registration.setEnabled(false);
 	    return registration;
 	}
+	@Bean
+	public FilterRegistrationBean permissionRegistration(CityManagementPermissionFilter cityManagementPermissionFilter) {
+		FilterRegistrationBean registration = new FilterRegistrationBean(cityManagementPermissionFilter);
+		registration.setEnabled(false);
+		return registration;
+	}
 }
