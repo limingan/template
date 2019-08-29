@@ -1,14 +1,20 @@
 package com.city.management.collection.model.base;
 
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@ApiModel(description= "链接信息")
 public class AgentLink implements Serializable {
+    @ApiModelProperty(value = "ID")
     private Integer id;
-
+    @ApiModelProperty(value = "编码")
     private String tenantCode;
 
+    @ApiModelProperty(value = "链接名称")
     private String linkName;
 
     private Date createTime;
